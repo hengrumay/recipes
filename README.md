@@ -1,8 +1,10 @@
 # metis_project_recipes 
 ** (folder being updated)  
 
-I love to cook but I am quite terrible at following recipes (possible self-diagnosed recipe-dyslexia). I tend to modify them!   
-However, I love getting inspirations from different recipes and foodie experience. I wanted to explore how one could come up with alternative recipe suggestions based on a) similarity of ingredients within a recipe of interest, and b) whether we could use ingredients and instructions from recipes to categorize their 'difficulty'.
+I love to cook but I am quite terrible at following recipes -- I tend to modify them! (possible recipe-dyslexia).  
+ 
+However, I love getting inspirations from different recipes and foodie experience.   
+I wanted to explore how one could come up with alternative recipe suggestions based on a) similarity of ingredients within a recipe of interest, and b) whether we could use ingredients and instructions from recipes to categorize their 'difficulty'.
 
 Recipe data was scraped from bbcgoodfood.com.
 
