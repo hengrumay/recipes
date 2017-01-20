@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{#<title>Example of Bootstrap 3 Three Column Grid Layouts for All Devices</title>#}
+{#<title>Dropdown Search test</title>#}
+<title>MenuPlannerHelper--Home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link href = "https://www.jqueryscript.net/css/jquerysctipttop.css"
+         rel = "stylesheet" type = "text/css">
+<link rel = "stylesheet" href = "jQuery-plugin-progressbar.css">
+<script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
+<script src = "https://code.jquery.com/jquery-2.1.4.min.js"></script>
+{#<script src = "jQuery-plugin-progressbar.js"></script>#}
+
+<script type="text/javascript" src="{{url_for('static',filename="progressbar.js")}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename="d3.min.js")}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename="autocomplete.js")}}"></script>
+    <link rel="stylesheet" href="{{url_for('static',filename="bariol.css")}}"/>
+    <link rel="stylesheet" href="{{url_for('static',filename="style.css")}}"/>
+
+<style type="text/css">
+    /* Some custom styles to beautify this example */
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: "Lithos Pro", "Avenir";
+        line-height: 1em;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    h4, h5, h6 {
+        font-family: "Avenir";
+        line-height: 1em;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: dimgrey;
+    }
+
+    p {
+        font-family: Avenir;
+        color: dimgrey;
+        font-size: inherit;
+        line-height: 1em;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    a {
+        color: grey;
+    }
+
+    .footer{
+        margin-bottom: 10px;
+    }
+
+   .navbar-brand, .nav{
+        font-family: "Lithos Pro", Avenir;
+    }
+{#    .selected-header{#}
+{#        padding: 10px;#}
+{#        font-size: 18px;#}
+{#        min-height: 50px;#}
+{#        min-width: 300px;#}
+{#        background: #dbdfe5;#}
+{#        margin-bottom: 10px;#}
+{#    }#}
+{#    .selected-content{#}
+{#        padding: 10px;#}
+{#        font-size: 16px;#}
+{#        min-height: 300px;#}
+{#        min-width: 300px;#}
+{#        background: #dbdfe5;#}
+{#        margin-bottom: 10px;#}
+{#    }#}
+{#    .selected-content.bg-alt{#}
+{#        min-height: 200px;#}
+{#        margin-bottom: 30px;#}
+{#        background: #abb1b8;#}
+{#    }#}
+    .select-info{
+        padding: 2px;
+{#        font-size: 20px;#}
+        min-height: 50px;
+{#        min-width: 300px;#}
+{#        background: #dbdfe5;#}
+        margin-bottom: 2px;
+    }
+    .select-content{
+        padding: 0px;
+        font-size: 16px;
+        height: 50px;
+        min-width: 150px;
+        margin-bottom: 10px;
+{#        background: #b4bac0;#}
+    }
+
+
+    @media (min-width: 768px) {
+      .navbar-nav {
+        width: 100%;
+        text-align: center;
+      }
+      .navbar-nav > li {
+        float: none;
+        display: inline-block;
+      }
+      .navbar-nav > li.navbar-right {
+        float: right !important;
+      }
+    }
+
+    #container {
+      margin: 10px;
+      margin-left: 10%;
+      width: 200px;
+      height: 20px;
+      position: relative;
+    }
+
+</style>
+
+</head>
+
+
+<body>
+
+    <!-- Open the output in a new blank tab (Click the arrow next to "Show Output" button) and resize the browser window to understand how the Bootstrap responsive grid system works. -->
+
+	<div class="container">
+        <hr>
+
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+{#              <li class="navbar-left"><a href="../#about" class="navbar-brand">    </a></li>#}
+              <li class="navbar-left"><a href="../#about" class="navbar-brand"> ~Menu-Helper~ </a></li>
+{#              <li class="navbar-left"><a href="../">Home</a></li>#}
+{#              <li class="disabled"><a href="#" class="text-center"> ... Displaying Search Results : </a></li>#}
+{#              <li><a href="#">Center 2</a></li>#}
+{#              <li><a href="#">Center 3</a></li>#}
+              <li class="navbar-right"><a href="#">  </a></li>
+{#              <li class="navbar-right"><a href="../">* RETURN to Recipe Search *</a></li>#}
+            </ul>
+          </div>
+        </nav>
+
+
+        <hr>
+
+        <!--Row with 3 columns -->
+        <div class="row">
+
+            <!--col-1-->
+            <div class="col-xs-4">
+            	<div class="select-info">
+                    <h4 class="text-center">Recipes from:</h4>
+                </div>
+            </div>
+            <!--col-2-->
+            <div class="col-xs-4">
+                <div class="select-info" align="center">
+                    <h4 class="text-center"><a href="http://www.bbcgoodfood.com"> BBCgoodfood.com </a> </h4>
+                </div>
+            </div>
+
+            <!--col-3-->
+            <div class="col-xs-4">
+            	<div class="select-info">
+                    <h5 class="text-center" id="container"> Tagging Recipe Difficulty... </h5>
+{#                    <div id="container"> </div>#}
+                    <script>
+                        var bar = new ProgressBar.Line(container, {
+                          strokeWidth: 10,
+                          easing: 'easeInOut',
+                          duration: 2500,
+                          color: 'lightgrey',
+{#                          trailColor: '#eee',#}
+{#                          trailWidth: 1,#}
+                          svgStyle: {width: '100%', height: '100%'},
+                          text: {
+                            style: {
+                              // Text color.
+                              // Default: same as stroke color (options.color)
+                              color: '#999',
+                              position: 'absolute',
+                              right: '60px',
+                              top: '0px',
+                              padding: '10px',
+                              margin: '10px',
+                              transform: null
+                            },
+                            autoStyleContainer: false
+                          },
+                          from: {color: '#FFEA82'},
+                          to: {color: '#ED6A5A'},
+                          step: (state, bar) => {
+                            bar.setText(Math.round(bar.value() * 100) + ' %');
+                          }
+                        });
+                        bar.animate(1.0);  // Number from 0.0 to 1.0
+                    </script>
+
+
+                    <div class = "progress-bar position" data-percent = "100"
+                    data-duration = "1000" data-color = "#ccc,yellow"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!--Row with 3 columns -->
+        <div class="row">
+
+            <!--col-1-->
+            <div class="col-xs-3">
+            	<div class="select-info"> </div>
+            </div>
+            <!--col-2-->
+            <div class="col-xs-6">
+                <div class="select-info" align="center">
+                        <h2 class="text-center"> Search for a recipe: </h2>
+                        <div align="center" id="test" style="width:100%; height:100%;"></div>
+
+                </div>
+            </div>
+
+            <!--col-3-->
+            <div class="col-xs-3">
+            	<div class="select-info">
+                    <p class="text-center"> </p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <hr>
+
+
+        <hr>
+
+
+    </div>
+
+    <footer class="footer">
+      <div class="container"  align="center">
+        <p font-size="8px" font-family="Avenir" class="text-muted">&copy; H-RM Merkle-Tan 2016</p>
+      <hr>
+      </div>
+    </footer>
+
+</body>
+
+<script>
+
+    var allRecipes = {{ allRecipes | safe }};
+    //console.log('hello')
+
+    function onSelect(d) {
+    //console.log(d);
+        document.location = 'findsimilar/'+d.index;
+{#        document.location = '/'+d.index;#}
+    }
+
+    //Setup and render the autocomplete
+    //console.log(d3.select("#bp-ac"))
+    var mc = autocomplete(document.getElementById('test'))
+          .keys(allRecipes)
+          .dataField("title")
+          .placeHolder("TYPE to SEARCH")
+          .width(960)
+          .height(50)
+          .onSelected(onSelect)
+          .render();
+
+
+</script>
+
+</html>

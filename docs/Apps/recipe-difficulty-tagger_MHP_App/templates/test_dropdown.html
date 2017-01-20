@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {#    <meta charset="UTF-8">#}
+    {#    <meta HTTP-EQUIV="X-UA-COMPATIBLE" CONTENT="IE=EmulateIE9" >#}
+    {#    <meta HTTP-EQUIV="X-UA-COMPATIBLE" CONTENT="IE=edge" >#}
+    <title>dropdownList-test</title>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+          rel="stylesheet">
+    <meta charset="utf-8">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static',filename="d3.min.js")}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename="autocomplete.js")}}"></script>
+
+    {#    <script src="//d3js.org/d3.v4.min.js"></script>#}
+    {#    <script src="//d3js.org/topojson.v1.min.js"></script>#}
+
+    <link rel="stylesheet" href="{{url_for('static',filename="bariol.css")}}"/>
+    <link rel="stylesheet" href="{{url_for('static',filename="style.css")}}"/>
+
+    {#    <style>#}
+    {#      .paddbar {#}
+    {#       fill: white;#}
+    {##}
+    {#     }#}
+    {#     </style>#}
+
+</head>
+
+<body>
+
+
+
+    <div id="test" style="width:100%; height:100%;"></div>
+
+{#<select>#}
+{#    {% for idx,row in recipeDF.iterrows() %}#}
+{#    <option value = "{{ idx }}"> {{ row.title }} </option>#}
+{#    {% endfor%}#}
+{#</select>#}
+
+
+    <div id="text"  > this should be below search bar </div>
+
+
+
+    <script>
+    //console.log('boo')
+    var allRecipes = {{ allRecipes | safe }};
+    //console.log('hello')
+
+    function onSelect(d) {
+        //console.log(d);
+        document.location = 'findsimilar/'+d.index;
+    }
+   //Setup and render the autocomplete
+
+      //Call back for when user selects an option
+    //console.log(d3.select("#bp-ac"))
+    var mc = autocomplete(document.getElementById('test'))
+          .keys(allRecipes)
+          .dataField("title")
+          .placeHolder("Search-Type a recipe to consider - Start typing here")
+          .width(960)
+          .height(500)
+          .onSelected(onSelect)
+          .render();
+
+    </script>
+
+
+    </body>
+</html>

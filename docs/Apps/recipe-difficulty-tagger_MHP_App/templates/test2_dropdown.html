@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>dropdownList-test</title>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+          rel="stylesheet">
+    <meta charset="utf-8">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{#  <title>jQuery UI Autocomplete - Default functionality</title>#}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{#  <link rel="stylesheet" href="/resources/demos/style.css">#}
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+</head>
+
+<body>
+
+{##}
+{# var container = d3.select(this).selectAll("#bp-ac").data([data]);#}
+{#<div id="searchcontainer">#}
+{#    <div id="bpx-ac" class="bp-ac" style="width:100%; height:100%; position: relative; width: 728px; height: 200px;" > </div>#}
+{#</div>#}
+{##}
+{#<div id="test" style="width:100%; height:100%;"></div>#}
+{##}
+{#<select>#}
+{#    {% for idx,row in recipeDF.iterrows() %}#}
+{#    <option value = "{{ idx }}"> {{ row.title }} </option>#}
+{#    {% endfor%}#}
+{#</select>#}
+{##}
+
+    <div class="ui-widget">
+        <label for="tags">Tags: </label>
+        <input id="tags">
+    </div>
+
+    <button> select </button>
+
+
+
+
+    <script>
+
+        $( function() {
+            var allRecipes = {{ allRecipes | safe }};
+            var availableTags = allRecipes.map(function(d) {return d.title;})
+            //console.log("loaded");
+
+        $( "#tags" ).autocomplete({
+            source: availableTags
+                });
+            } );
+
+        function onSelect(d) {
+        //console.log(d);
+            document.location = 'findsimilar/'+d.index;
+        }
+
+    </script>
+
+
+
+
+
+
+
+    </body>
+</html>

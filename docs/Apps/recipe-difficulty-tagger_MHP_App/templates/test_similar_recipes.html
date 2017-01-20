@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test_similar</title>
+</head>
+<body>
+
+    <div>
+        <div>
+            <a href="{{ selectrecipeDF.recipeLink }}"> <img src="{{ selectrecipeDF.imgURL }}"> </a>
+        </div>
+
+        <div>
+            <a href="{{ selectrecipeDF.recipeLink }}"> {{ selectrecipeDF.title }} </a>
+        </div>
+
+        <div>
+            <option value = "{{ selectID }}"> {{ selectrecipeDF.prepDifficulty }} </option>
+        </div>
+
+    </div>
+
+    <br>
+
+{#    <div>#}
+{#        <option value = "{{ selectID }}"> {{ selectrecipeDF.title }} </option>#}
+{#    </div>#}
+
+
+
+{#{% for Ridx,Rrow in recipeDF.iterrows() %}#}
+{#    <div>#}
+{#        <img src="{{ Rrow.imgURL }}">#}
+{#        <a href="{{ Rrow.recipeLink }}"> {{ Rrow.title }} </a>#}
+{##}
+{#    </div>#}
+{##}
+{#    <div>#}
+{#        <option value = "{{ Ridx }}"> {{ Rrow.title }} </option>#}
+{#    </div>#}
+{##}
+{#{% endfor%}#}
+
+
+{% for Eidx,Erow in easyDF.iterrows() %}
+    <div>
+        <div>
+            <a href="{{ Erow.recipeLink }}"> <img src="{{ Erow.imgURL }}"> </a>
+        </div>
+
+        <div>
+            <a href="{{ Erow.recipeLink }}"> {{ Erow.title }} </a>
+        </div>
+    </div>
+
+    <br>
+
+{#    <div>#}
+{#        <option value = "{{ Eidx }}"> {{ Erow.title }} </option>#}
+{#    </div>#}
+
+{% endfor%}
+
+
+{% for Didx,Drow in diffDF.iterrows() %}
+    <div>
+        <div>
+            <a href="{{ Drow.recipeLink }}"> <img src="{{ Drow.imgURL }}"> </a>
+        </div>
+
+        <div>
+            <a href="{{ Drow.recipeLink }}"> {{ Drow.title }} </a>
+        </div>
+
+    </div>
+
+    <br>
+
+{#    <div>#}
+{#        <option value = "{{ Didx }}"> {{ Drow.title }} </option>#}
+{#    </div>#}
+
+{% endfor%}
+
+
+</body>
+</html>

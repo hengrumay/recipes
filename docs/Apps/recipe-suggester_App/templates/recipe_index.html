@@ -1,0 +1,329 @@
+<!-- http://cfss.uchicago.edu/slides/week10_flaskPlotting.pdf -->
+<!-- https://gist.github.com/rduplain/1641344 -->
+<!-- http://code.runnable.com/UiPcaBXaxGNYAAAL/how-to-upload-a-file-to-the-server-in-flask-for-python -->
+<!-- http://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+          rel="stylesheet">
+    <meta charset="utf-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//d3js.org/d3.v4.min.js"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+    <meta HTTP-EQUIV="X-UA-COMPATIBLE" CONTENT="IE=EmulateIE9" >
+    <script type="text/javascript" src="{{url_for('static',filename="d3.min.js")}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename="autocomplete.js")}}"></script>
+    <link rel="stylesheet" href="{{url_for('static',filename="bariol.css")}}"/>
+    <link rel="stylesheet" href="{{url_for('static',filename="style.css")}}"/>
+    <style>
+      .bar {
+       fill: white;
+     }
+     </style>
+  </head>
+
+
+  <body>  
+
+    <div class="container">
+      <div id="title" style="font-size: 200%;text-align:center"></div>
+
+      <div class="header">
+        <h1 style="font-size: 300%; text-align:center; color:grey; background-color:white; "><!-- Recipes to check out! --></h1>
+      </div>
+      
+    </div>  
+
+    <div id="chart_area" class="wrapper" style="text-align:center">
+      
+      <h1 class="text-muted" style="font-size: 200%;text-align:center"> -=-=-=-  </h1>
+      
+      <p class="space"></p>
+
+      <div id="bar_chart" style="font-size: 200%;text-align:center"></div>
+      
+      <div id="bar_chart2" style="font-size: 200%;text-align:center"></div>
+      
+      <div id="bar_chart3" style="font-size: 200%;text-align:center"></div>
+
+      <div id="bar_chart4" style="font-size: 200%;text-align:center"></div>
+
+      
+
+      <!-- <h1 class="text-muted" style="font-size: 200%;text-align:center">  ### </h1>
+      
+      <div id="bar_chart_b" style="font-size: 200%;text-align:center"></div>
+      
+      <div id="bar_chart_b2" style="font-size: 200%;text-align:center"></div>
+     -->
+    </div>
+
+    <div class="header">
+    <h1 class="text-muted" style="font-size: 200%;text-align:center;"> -=-=-=- </h1>
+    </div>
+
+
+    <div id="SEARCHBOX" style="text-align:center; margin: 0% ;width:20%; height:100%; font-size: 200%;"> </div> <!-- // autocomplete -->
+
+    <script language="JavaScript">
+
+      //Create the SVG
+      var svg = d3.select("#title").append("svg")
+          .attr("width", 400)
+          .attr("height", 120);
+            
+      //Create an SVG path      
+      svg.append("path")
+        .attr("id", "wavy") //very important to give the path element a unique ID to reference later
+        .attr("d", "M 10,90 Q 100,15 200,70 Q 340,140 400,30") //Notation for an SVG path, from bl.ocks.org/mbostock/2565344
+        .style("fill", "none")
+        .style("stroke", "white");//"#AAAAAA");
+
+      //Create an SVG text element and append a textPath element
+      svg.append("text")
+         .append("textPath") //append a textPath to the text element
+        .attr("xlink:href", "#wavy") //place the ID of the path here
+        .style("text-anchor","middle") //place the text halfway on the arc
+        .attr("startOffset", "50%")  
+        .attr("font-size", 38) 
+        .attr("fill", "grey")
+        .text("... Recipes to consider ...");
+
+
+      //Variable to hold autocomplete options
+      var keys;
+
+      //Load US States as options from CSV - but this can also be created dynamically
+      d3.csv("{{url_for('static',filename="bbc_titles.csv")}}",function (csv) {
+          keys=csv; //keys?
+          start();
+      });
+
+
+      //Call back for when user selects an option
+      function onSelect(d) {
+          var search_title = JSON.stringify({
+        example: d.title
+      });
+
+         $.ajax({
+         type: "POST",
+         contentType: "application/json; charset=utf-8",
+         url: "/recommend/",
+         dataType: "json",
+         async: true,
+         data: search_title, //title-test
+         success: function (data) {
+           var searchedTitle = data["searchedTitle"];
+           var RECrecipes = data["RECrecipes"]; // returned from python code
+           var blogs = data["recommend_blog"];
+           
+           d3.select("#searchedRecipeTitle")
+             .attr("x", 400)
+             .text(searchedTitle[0]);
+           
+           d3.select("#RECrecipes1")
+             .attr("x", 400)
+             // .text(RECrecipes[0][0] +'  ------    cosine-dist: '+ RECrecipes[0][1]);
+             .text(RECrecipes[0][0] );
+
+           d3.select("#RECrecipes2")
+             .attr("x", 400)
+             .text(RECrecipes[1][0] );
+             // .text(RECrecipes[1][0] +'  ------   cosine-dist: '+ RECrecipes[1][1]);
+
+           d3.select("#RECrecipes3")
+             .attr("x", 400)
+             .text(RECrecipes[2][0] );
+             // .text(RECrecipes[2][0] +'  ------   cosine-dist: '+ RECrecipes[2][1]);  
+           
+           d3.select("#percent_text_b")
+             .attr("x", 500)
+             .text(blogs[0]);
+           
+           d3.select("#percent_text_b2")
+             .attr("x", 500)
+             .text(blogs[1]);
+         },
+         error: function (result) {
+         }
+       })
+
+      }
+
+      //Setup and render the autocomplete
+      function start() {
+          var mc = autocomplete(document.getElementById('SEARCHBOX')) //searchbox
+                  .keys(keys)
+                  .dataField("title")
+                  .placeHolder("Search-Type a recipe to consider - Start typing here")
+                  .width(100)
+                  .height(100)
+                  .onSelected(onSelect)
+                  .render();
+      }
+
+//////////////////////////
+// SEARCHED-title(BAR)
+     var chart = d3.select("#bar_chart")
+                   .append("svg:svg")
+                   .attr("width", 800)
+                   .attr("height", 50);
+
+     var bar = chart.append("g")
+                    .attr("class", "bar")
+
+     bar.append("svg:rect")
+          .attr("id", "chancebar") //tedtalks sugesstion#1
+          .attr("class", "bar")
+          .attr("width", 800)
+          .attr("height", 50);
+
+     bar.append("text")
+        .attr("id", "searchedRecipeTitle") //text for suggestion bar#
+        .attr("dy", ".75em")
+        .attr("y", 15)
+        .attr("x", 800)
+        .attr("text-anchor", "middle")
+        .attr("fill", "royalblue")
+        .attr("font-size", 30)
+        .text( "");
+
+     bar.append("a")
+        .attr("xlink:href", "http://en.wikipedia.org/wiki/") //+word)
+
+// suggestion1
+     var chart = d3.select("#bar_chart2")
+                   .append("svg:svg")
+                   .attr("width", 800)
+                   .attr("height", 50);
+
+     var bar = chart.append("g")
+                    .attr("class", "bar")
+
+       bar.append("svg:rect")
+          .attr("id", "chancebar2")
+          .attr("class", "bar")
+          .attr("width", 800)
+          .attr("height", 50);
+
+     bar.append("text")
+        .attr("id", "RECrecipes1")
+        .attr("dy", ".75em")
+        .attr("y", 15)
+        .attr("x", 800)
+        .attr("text-anchor", "middle")
+        .attr("fill", "crimson")
+        .attr("font-size", 20)
+        .text( "");
+
+// suggestion2
+     var chart = d3.select("#bar_chart3")
+                   .append("svg:svg")
+                   .attr("width", 800)
+                   .attr("height", 50);
+
+     var bar = chart.append("g")
+                    .attr("class", "bar")
+
+       bar.append("svg:rect")
+          .attr("id", "chancebar3")
+          .attr("class", "bar")
+          .attr("width", 800)
+          .attr("height", 50);
+
+     bar.append("text")
+        .attr("id", "RECrecipes2")
+        .attr("dy", ".75em")
+        .attr("y", 15)
+        .attr("x", 800)
+        .attr("text-anchor", "middle")
+        .attr("fill", "crimson")
+        .attr("font-size", 20)
+        .text( "");
+
+// suggestion3
+     var chart = d3.select("#bar_chart4")
+                   .append("svg:svg")
+                   .attr("width", 800)
+                   .attr("height", 50);
+
+     var bar = chart.append("g")
+                    .attr("class", "bar")
+
+       bar.append("svg:rect")
+          .attr("id", "chancebar4")
+          .attr("class", "bar")
+          .attr("width", 800)
+          .attr("height", 50);
+
+     bar.append("text")
+        .attr("id", "RECrecipes3")
+        .attr("dy", ".75em")
+        .attr("y", 15)
+        .attr("x", 800)
+        .attr("text-anchor", "middle")
+        .attr("fill", "crimson")
+        .attr("font-size", 20)
+        .text( "");
+
+// bar_b BLOGS
+     var chart = d3.select("#bar_chart_b")
+                   .append("svg:svg")
+                   .attr("width", 800)
+                   .attr("height", 50);
+
+     var bar = chart.append("g")
+                    .attr("class", "bar")
+
+       bar.append("svg:rect")
+          .attr("id", "chancebar_b")
+          .attr("class", "bar")
+          .attr("width", 800)
+          .attr("height", 50);
+
+     bar.append("text")
+        .attr("id", "percent_text_b")
+        .attr("dy", ".75em")
+        .attr("y", 15)
+        .attr("x", 800)
+        .attr("text-anchor", "middle")
+        .attr("fill", "royalblue")
+        .attr("font-size", 20)
+        .text( "");
+
+
+// bar_b2
+     var chart = d3.select("#bar_chart_b2")
+                   .append("svg:svg")
+                   .attr("width", 800)
+                   .attr("height", 50);
+
+     var bar = chart.append("g")
+                    .attr("class", "bar")
+
+       bar.append("svg:rect")
+          .attr("id", "chancebar_b2")
+          .attr("class", "bar")
+          .attr("width", 800)
+          .attr("height", 50);
+
+     bar.append("text")
+        .attr("id", "percent_text_b2")
+        .attr("dy", ".75em")
+        .attr("y", 15)
+        .attr("x", 800)
+        .attr("text-anchor", "middle")
+        .attr("fill", "royalblue")
+        .attr("font-size", 20)
+        .text( "");
+
+    </script>
+    </div>
+
+  </body>
+
+</html>
