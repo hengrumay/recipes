@@ -1,5 +1,5 @@
 # metis_project_recipes 
-** (folder being updated)  
+** (folder undergoing updates)  
 
 I love to cook but I am quite terrible at following recipes -- I tend to modify them! (possible recipe-dyslexia).  
  
