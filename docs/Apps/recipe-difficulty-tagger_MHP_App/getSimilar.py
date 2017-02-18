@@ -11,8 +11,10 @@
 import pandas as pd
 import numpy as np
 
-### LOAD Model Files
-modelpath = '/Users/hrm/Documents/Dropbox/DSrelated/Metis/recipes/recipe-difficulty-tagger_MHP_App/models/'
+### LOAD Model Files for AWS app-path
+#modelpath = '/Users/hrm/Documents/Dropbox/DSrelated/Metis/recipes/recipe-difficulty-tagger_MHP_App/models/'
+#modelpath = '/var/www/FlaskApps/recipe_menuplannerApp/models/'
+modelpath = '/home/ubuntu/hrm/FlaskApps/aws_recipe_menuplannerApp/models/' # EC2 oregon amazon.pem
 modelpicklepath = modelpath+"bbcgfd_ilda_tf_100Ingredtopics.pkl"
 
 ### LOAD CSV File
