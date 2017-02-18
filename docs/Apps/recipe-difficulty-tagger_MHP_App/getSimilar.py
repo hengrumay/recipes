@@ -41,6 +41,7 @@ recipeDF['prepDiffN'] = DiffN
 
 # load nltk's SnowballStemmer as variabled 'stemmer'
 import nltk
+#nltk.download() ## need to download punkt
 from nltk.stem.snowball import SnowballStemmer
 stemmer = SnowballStemmer("english")
 
