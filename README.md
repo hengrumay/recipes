@@ -1,5 +1,4 @@
-# metis_project_recipes 
-** (folder undergoing updates)  
+# metis_project_recipes  
 
 I love to cook but I have a tendency to modify recipes... =)  
  
