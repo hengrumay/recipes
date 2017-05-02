@@ -1,4 +1,4 @@
-## Recipes : _finding *SIMILAR* or *EASIER* options that are just as delectable_  
+## Menu Planner Helper -- _an app to provide recipe alternatives based on similar recipes and categorized by recipe difficulty_  
 
 I love to cook but I have a tendency to modify recipes... =)  
  
