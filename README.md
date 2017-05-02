@@ -1,4 +1,4 @@
-# metis_project_recipes  
+## Recipes : _finding *SIMILAR* or *EASIER* options that are just as delectable_  
 
 I love to cook but I have a tendency to modify recipes... =)  
  
