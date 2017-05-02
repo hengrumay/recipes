@@ -7,7 +7,7 @@ I love to cook but I have a tendency to modify recipes... =)
 Given that I love getting inspirations from different recipes and foodie experience, I wanted to explore how one could come up with alternative recipe suggestions 
 - a) based on similarity of ingredients within a recipe of interest,   
 and whether we could  
-- b) use ingredients and instructions from recipes to categorize their 'difficulty'.
+- b) use ingredients and instructions from recipes to categorize their 'difficulty'
 
 Recipe data was scraped from [bbcgoodfood.com](www.bbcgoodfood.com)
 
