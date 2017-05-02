@@ -1,5 +1,5 @@
 ## Menu Planner Helper:   
-#### >> an app to provide recipe alternatives based on similar recipes and categorized by recipe difficulty
+> an app to provide recipe alternatives based on similar recipes and categorized by recipe difficulty
 
 I love to cook but I have a tendency to modify recipes... =)  
  
