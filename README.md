@@ -3,7 +3,7 @@
 ###  
 
 I love to cook but I have a tendency to modify recipes!
-As someone who derives inspirations from different recipes and foodie experience, I wanted to explore how one could come up with alternative recipe suggestions 
+As someone who derives inspiration from different recipes and foodie experience, I wanted to explore how one could come up with alternative recipe suggestions 
 - a) based on similarity of ingredients within a recipe of interest,   
 and whether we could  
 - b) use ingredients and instructions from recipes to categorize their 'difficulty'
